@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <title>MDS Monitoring-Tool</title>
+     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+	<style>
+    </style>
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="dropDown.css" />
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="WebsocketService.js"></script>
+    <script type="text/javascript" src="Whiteboard.js"></script>
+    <script type="text/javascript" src="map.js"></script>
+    <script type="text/javascript" src="playerTable.js"></script>
+    <script type="text/javascript" src="prototype.js"></script>
+    <script type="text/javascript" src="dropDownMenu.js"></script>
+    <script type="text/javascript" src="Table.js"></script>
+    <script type="text/javascript" src="ControlDiv.js"></script>
+
+	<script>
+			window.onload = function(){
+				var wss = new WebsocketService();
+				
+			}
+	</script>
+  </head>
+  <body>
+  
+  <div id="headerPanel">
+    <img class="headerPanel" src="images/MDS-Logo.png" alt="Das Bild konnte nicht geladen werden" style= "width:40%; height:40%" border="0"> 	  
+ 	  - Monitoring Tool
+  </div>
+    <div id="map-canvas" style= "width:900px; height:500px"> </div>
+    <div id="controlPanel" value='Control Panel'> 
+	    <select id="dropdown" class="styled-button">
+	    <option value=''>---- Globale Lobby ----</option>
+	    <option value='{"mode":"gametemplates"}'>1. Verfügbare Spiele anfordern</option>
+	    <option value='{"mode":"activegames"}'>2. Laufende Spiele anfordern</option>
+	    <option value='{"mode":"monitor", "id":0, "name":"Monitor1"}'>3. Spiel betrachten</option>
+		</select>   
+	</div>
+    <form><textarea id="log" rows="30" cols="100" style="font-family:monospace; color:red; margin-left: 20px;"></textarea></form><br>
+
+  </body>
+</html>
