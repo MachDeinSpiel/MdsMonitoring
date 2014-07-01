@@ -10,7 +10,7 @@ function WebsocketService(){
 
 
             //Aufbau der Websocketverbindung
-                ws = new WebSocket("ws://localhost:8887"); // ws://195.37.176.178:1387 ws://feijnox.no-ip.org:8000
+                ws = new WebSocket("ws://feijnox.no-ip.org:8000"); // ws://195.37.176.178:1387 ws://feijnox.no-ip.org:8000
                 ws.onopen = function() {
                 	document.getElementById('log').value = "[WebSocket#onopen]\n";
                 	if(open === false){
@@ -18,7 +18,7 @@ function WebsocketService(){
                 		open = !open;
                 	}
 
-                }
+                };
                 
                 ws.onmessage = function(e) {
                 	document.getElementById('log').value = "[WebSocket#onmessage] Message: '" + e.data + "'\n";
@@ -41,12 +41,12 @@ function WebsocketService(){
 		       			console.log(whiteboard);
 		   				
                     }
-                }
+                };
 
                     
                 ws.onclose = function() {
                 	document.getElementById('log').value = "[WebSocket#onclose]\n";
-                }
+                };
 
                 
         		mydropdown.onclick = function(){
@@ -60,7 +60,7 @@ function WebsocketService(){
         			ws.send(this.value);
 
         			
-        		}
+        		};
             
         		// major update function
         		function update(changings, whiteboard, values){

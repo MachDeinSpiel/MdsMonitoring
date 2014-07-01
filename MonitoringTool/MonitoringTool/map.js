@@ -1,25 +1,18 @@
 function Map(){
 
 var map;
-	var TILE_SIZE = 256;
 	var bremen = new google.maps.LatLng(53.05437, 8.78788);
-	var player= 1;
-	// array for player marker
-	var players=[];
-	// array for item marker
-	var items = [];
+
 
 	var whiteboard;	
 	
 	var itemDiv = [];
     var ddDivOptions = {};
     var dropDownOptions = {};
-    var dropDown1;
-    var dropDown2;
     var first = true;
 
 	// array for DropDown information
-	var playersDiv = [];
+
 
 	// initializing player information window
 	function createInfoWindowContent(player) {	
@@ -61,7 +54,7 @@ var map;
 
 		return whiteboard;
 	
-	}
+	};
 	
 	// updating player markers
 	function updatePlayers(whiteboard) {
@@ -113,7 +106,16 @@ var map;
 		    		    null, /* origin is 0,0 */
 		    		    null, /* anchor is bottom center of the scaled image */
 		    		    new google.maps.Size(40, 40)
-		    		);  
+		    		); 
+		    	if(totalItem[i].visibility == 'none'){
+		    		image = new google.maps.MarkerImage(
+			    			images/grau.png,
+			    		    null, /* size is determined at runtime */
+			    		    null, /* origin is 0,0 */
+			    		    null, /* anchor is bottom center of the scaled image */
+			    		    new google.maps.Size(40, 40)
+			    		); 
+		    	}
 		    	totalItem[i].marker = new google.maps.Marker({
 		        	position: myLatlng,
 		        	map: map,
@@ -123,6 +125,16 @@ var map;
 		        });
 		    } else { // update the marker
 		    	totalItem[i].marker.setPosition(myLatlng);
+		    	if(totalItem[i].visibility == 'none'){
+		    		var image = new google.maps.MarkerImage(
+			    			images/grau.png,
+			    		    null, /* size is determined at runtime */
+			    		    null, /* origin is 0,0 */
+			    		    null, /* anchor is bottom center of the scaled image */
+			    		    new google.maps.Size(40, 40)
+			    		); 
+		    		totalItem[i].marker.setImage(image);
+		    	}
 		    }
 		}
 
@@ -196,7 +208,7 @@ var map;
 	}
 	Map.prototype.clearMapItems = function(which){
 		clearItems(which);
-	}
+	};
 	
 	function clearItems(which){
 		  setAllItemsMap(null, which);
@@ -220,7 +232,7 @@ var map;
 		for(var i in whichItem){
 			var labelName = whichItem[i].title;
 			if(whichItem[i].pathKey == 'template'){
-				labelName = 'Player'
+				labelName = 'Player';
 			}
 	        var hideItemOptions = {
 	        		gmap: map,
@@ -230,7 +242,7 @@ var map;
 	        		action: function(){
 	        			showItems(hideItemOptions.id, whichItem);
 	        		}        		        		
-	        }
+	        };
 	        var check1 = new checkBox(hideItemOptions);
 	
 	        itemDiv.push(check1);
@@ -244,7 +256,7 @@ var map;
         ddDivOptions = {
         	items: itemDiv,
         	id: "myddDiv"        		
-        }
+        };
         itemdropDownDiv = new dropDownOptionsDiv(ddDivOptions);               
                 
         dropDownOptions = {
@@ -254,7 +266,7 @@ var map;
         		title: 'Click to use several Filters',
         		position: google.maps.ControlPosition.TOP_RIGHT,
         		dropDown: itemdropDownDiv 
-        }   
+        } ;  
         //Item DropDown
         dropDown2 = new dropDownControl(dropDownOptions);               
 
@@ -278,7 +290,7 @@ var map;
         		action: function(){
         			showPlayers(hidePlayersOptions.id);
         		}        		        		
-        }
+        };
         var check1 = new checkBox(hidePlayersOptions);
         
         var checkOptions2 = {
@@ -289,7 +301,7 @@ var map;
         		action: function(){
         			showLowHealthPlayers(checkOptions2.id);
         		}        		        		
-        }
+        };
         var check2 = new checkBox(checkOptions2);
         
         //create the input box items
@@ -298,7 +310,7 @@ var map;
         var ddDivOptions = {
         	items: [check1, check2],
         	id: "myddOptsDiv"        		
-        }
+        };
         //alert(ddDivOptions.items[1]);
         var dropDownDiv = new dropDownOptionsDiv(ddDivOptions);               
                 
@@ -309,12 +321,12 @@ var map;
         		title: 'Click to use several Filters',
         		position: google.maps.ControlPosition.TOP_RIGHT,
         		dropDown: dropDownDiv 
-        }   
+        }; 
         //Player DropDown
         dropDown1 = new dropDownControl(dropDownOptions);
  
         return map;
 		
-	}
+	};
 }
 //google.maps.event.addDomListener(window, 'load', initialize);

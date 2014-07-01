@@ -10,7 +10,7 @@ function Whiteboard() {
 
 			 }			 
 		}
-	}
+	};
 
 		Whiteboard.prototype.setAttribute = function(base, keys, value){
 			// Function: createNestedObject( base, names[, value] )

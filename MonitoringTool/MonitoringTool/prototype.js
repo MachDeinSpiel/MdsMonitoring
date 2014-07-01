@@ -18,7 +18,7 @@ var Prototype = {
       WebKit:         ua.indexOf('AppleWebKit/') > -1,
       Gecko:          ua.indexOf('Gecko') > -1 && ua.indexOf('KHTML') === -1,
       MobileSafari:   /Apple.*Mobile.*Safari/.test(ua)
-    }
+    };
   })(),
 
   BrowserFeatures: {

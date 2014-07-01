@@ -42,7 +42,7 @@
    	  	google.maps.event.addDomListener(container,'click',function(){
    	  		(document.getElementById(bDiv.id).style.display == 'block') ? document.getElementById(bDiv.id).style.display = 'none' : document.getElementById(bDiv.id).style.display = 'block';
    	  		options.action(); 
-   	  	})
+   	  	});
    	  	return container;
      }
      function separator(){
@@ -91,7 +91,7 @@
     		setTimeout( function(){
     			document.getElementById(options.dropDown.id).style.display = 'none';
     		}, 3000);
-    	  })      	  
+    	  });      	  
       }
      
      function buttonControl(options) {
