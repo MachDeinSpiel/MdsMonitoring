@@ -40,7 +40,6 @@ var map;
 				updateItems(whiteboard[i]);
 				createItemDiv(whiteboard[i]);
 				addInfoWindowListener(whiteboard[i]);
-				console.log("Ich werde ausgeführt");
 			}
 
 		}
@@ -133,7 +132,7 @@ var map;
 			    		    null, /* anchor is bottom center of the scaled image */
 			    		    new google.maps.Size(40, 40)
 			    		); 
-		    		totalItem[i].marker.setImage(image);
+		    		totalItem[i].marker.setIcon(image);
 		    	}
 		    }
 		}
