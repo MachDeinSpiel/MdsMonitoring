@@ -1,4 +1,22 @@
-      #map-canvas {
+		#rootDiv0 {
+		background-color: #55c51b;
+		}
+		#childDiv0 {
+		position: relative;
+		margin-left: 30px;
+		background-color: #c5b31b;
+		}
+		#childDiv1 {
+		position: relative;
+		margin-left: 30px;
+		background-color: #a5b31b;
+		}
+		#childDiv2 {
+		position: relative;
+		margin-left: 30px;
+		background-color: #b5b31b;
+		}
+		#map-canvas {
         height: 100%;
         margin: 0px;
         padding: 0px;

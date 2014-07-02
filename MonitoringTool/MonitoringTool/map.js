@@ -49,7 +49,7 @@ var map;
 			first = !first;
 		}
 
-		generate_table(whiteboard);
+		explorer_whiteboard(whiteboard);
 
 		return whiteboard;
 	
