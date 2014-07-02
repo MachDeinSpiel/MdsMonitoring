@@ -42,12 +42,12 @@ var map;
 			}
 
 		}
-		//updatePlayers(whiteboard);
+		updatePlayers(whiteboard);
 
-		/*if(typeof whiteboard.Players != 'undefined' && first === true ){
+		if(typeof whiteboard.Players != 'undefined' && first === true ){
 			createItemDropDown();
 			first = !first;
-		}*/
+		}
 
 		generate_table(whiteboard);
 
@@ -113,7 +113,7 @@ var map;
 		        });
 		  //  } else { // update the marker
 		  //  	totalItem[i].marker = null;
-		    	if(totalItem[i].value == 'none'){
+		    	if(totalItem[i].value == 'remove'){
 		    		totalItem[i].marker.setMap(null);
 		    	}
 
