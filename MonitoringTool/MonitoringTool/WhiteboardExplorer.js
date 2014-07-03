@@ -1,98 +1,150 @@
-//function explorer_whiteboard(whiteboard) {
 function explorer_whiteboard(whiteboard) {
 	
-//	save whiteboard content to an array
+	delete_explorer();
+	
+//	bedingung zu player isnt undefined
 	if (whiteboard) {
+//		save whiteboard content to an array
 		var expWhiteboard = new Array(whiteboard);
-		console.log("expWhiteboard: " + expWhiteboard[0]);
+		var expPlayers = whiteboard.Players;
+		
+		var div = document.getElementById("controlPanel");
+		var frameDiv = document.createElement('div');
+		frameDiv.id = 'frameDiv';
+		
+		console.log('expPlayers: ' + expPlayers);
+		if (expPlayers) {
+			console.log('expPlayers: ' + expPlayers);
+			for (x=0; x<expWhiteboard.length; x++) {
+//			for (x=0; x<1; x++) {
+//				if (expWhiteboard[x] != 'undefined') {
+//					console.log('expWhiteboard[' + x + ']: ' + expWhiteboard[x].health);
+//				creates player node
+				var playerNumber = x + 1;
+				var rootDiv = document.createElement("div");
+				rootDiv.id = 'rootDiv' + x;
+				rootDiv.setAttribute("onclick", "clickEvent()");
+			
+//				image einfügen
+				var img = document.createElement("IMG");
+				img.src = 'images/player_icon_small.png';
+				rootDiv.appendChild(img);
+				var rootNode = document.createTextNode('Player' + playerNumber);
+				rootDiv.appendChild(rootNode);
+			
+//				Anzahl der Elemente ermitteln
+				var iLength = objectLength(expPlayers[x]);		
+				for (y=0; y<iLength; y++) {
+//				for (y=0; y<1; y++) {
+//					kreiert player childnode
+//					dynamische numerierung z.b. 'childDiv' + y
+					var childDiv = document.createElement("div");
+					childDiv.id = 'childDiv' + x + y;
+				
+					var childDiv0 = document.createElement("div");
+					childDiv0.id = 'childDiv' + x + '.0';
+					var childNode = document.createTextNode('pathKey: ' + expPlayers[x].pathKey);
+					childDiv0.appendChild(childNode);
+					rootDiv.appendChild(childDiv0);
+					
+					var childDiv1 = document.createElement("div");
+					childDiv1.id = 'childDiv' + x + '.1';
+					childNode = document.createTextNode('health: ' + expPlayers[x].health);
+					childDiv1.appendChild(childNode);
+					rootDiv.appendChild(childDiv1);
+					
+					var childDiv2 = document.createElement("div");
+					childDiv2.id = 'childDiv' + x + '.2';
+					childNode = document.createTextNode('latitude: ' + expPlayers[x].latitude);
+					childDiv2.appendChild(childNode);
+					rootDiv.appendChild(childDiv2);
+					
+					var childDiv3 = document.createElement("div");
+					childDiv3.id = 'childDiv' + x + '.3';
+					childNode = document.createTextNode('longitude: ' + expPlayers[x].longitude);
+					childDiv3.appendChild(childNode);
+					rootDiv.appendChild(childDiv3);
+					
+					var childDiv4 = document.createElement("div");
+					childDiv4.id = 'childDiv' + x + '.4';
+					childNode = document.createTextNode('inventory');
+					childDiv4.appendChild(childNode);
+					rootDiv.appendChild(childDiv4);
+//					for (z=0; z<expPlayers[x].inventory.length; z++) {
+//						var childDiv = document.createElement('div');
+//						childDiv.id = 'childDiv' + x + '.4.' + z;
+//						var childNode = document.createTextNode(expPlayers[x].inventory[z]);	
+//						childDiv.appendChild(childNode);
+//						childDiv4.appendChild(childDiv);
+//					}			
+				}
+				frameDiv.appendChild(rootDiv);
+				div.appendChild(frameDiv);
+				
+//				} else {
+//					console.log('is undefined!')
+//				}
+				
+			}
+		}
 	} else {
 		console.log('keine daten empfangen :(');
 	}
-	
-//	delete_explorer();
-	
-	var div = document.getElementById("controlPanel");
-	
-	for (x=0; x<expWhiteboard.length; x++) {
-		rootNumber = x + 1;
-//		console.log('counter: ' + x);
-//	for (x=0; x<1; x++) {
-//		kreiert player node
-		var number = x+1;
-//		var divName = 'rootDiv' + x;
-		var rootDiv = document.createElement("div");
-		rootDiv.id = 'rootDiv' + x;
-		rootDiv.setAttribute("onclick", "clickEvent()");
-		var rootNode = document.createTextNode('player' + number);
-		rootDiv.appendChild(rootNode);
-//		console.log(rootDiv);
-//		var child = expWhiteboard[x].childNodes.length;
-//		console.log('anz childNodes: ' + child);
-//		var elem = document.getElementById
-//		for (y=0; y<expWhiteboard[x].childNodes.length; y++) {
-//			console.log('counter: ' + );
-		for (y=0; y<1; y++) {
-//			kreiert player childnode
-//			dynamische numerierung z.b. 'childDiv' + y
-			var childDiv0 = document.createElement("div");
-			childDiv0.id = 'childDiv0';
-			var childDiv1 = document.createElement("div");
-			childDiv1.id = 'childDiv1';
-			var childDiv2 = document.createElement("div");
-			childDiv2.id = 'childDiv2';
-			var childNode = document.createTextNode(expWhiteboard[x].pathKey);
-//			var childNode = document.createTextNode('pathKey');
-			childDiv0.appendChild(childNode);
-			rootDiv.appendChild(childDiv0);
-			childNode = document.createTextNode(expWhiteboard[x].health);
-//			childNode = document.createTextNode('health');
-			childDiv1.appendChild(childNode);
-			rootDiv.appendChild(childDiv1);
-			childNode = document.createTextNode(expWhiteboard[x].inventory);
-//			childNode = document.createTextNode('inventory');	
-			childDiv2.appendChild(childNode);
-			rootDiv.appendChild(childDiv2);
-//			for (z=0; z<expWhiteboard.Player[x].inventory.length; z++) {
-//				var childDiv2 = document.createElement('div');
-//				childDiv2.id = 'childDiv2';
-//				var childNode2 = document.createTextNode(expWhiteboard.Player[x].inventory);	
-//				childDiv2.appendChild(childNode2);
-//				childDiv1.appendChild(childDiv2);
-//			}
-			
-		}
-		div.appendChild(rootDiv);
-	}
-	
 }
 
 function delete_explorer()	{
 
-	if (document.getElementById("explorer")) {
-		$(document.getElementById("explorer")).remove();
+	if (document.getElementById('frameDiv')) {
+		$(document.getElementById('frameDiv')).remove();
 	}
 }
 
-function clickEvent () {
-	var target = event.target.id;
-	var subString = target.substring(target.length-1, target.length);
-	var childString = (subString * 3);
+function path(obj, path, def) {
+
+    for(var i = 0,path = path.split('.'),len = path.length; i < len; i++){
+        if(!obj || typeof obj !== 'object') return def;
+        obj = obj[path[i]];
+    }
+
+    if(obj === 'undefined') return def;
+    return obj;
+}
+
+//returns the length of any objekt
+function objectLength(tmpObject) {
+	var iLength = 0;
+	for (var sKey in tmpObject) 
+	{
+		if (tmpObject.hasOwnProperty(sKey)) iLength++;
+	}
+	return iLength;
+};
+
+//change childDivX.Y.style.display between 'none' and 'block'
+function clickEvent (e) {
+	
+	if( !e ) e = window.event;
+	var x = e.target || e.srcElement;
+	console.log(document.getElementById(x.id));
+	var targetNo = x.id.substring(x.id.length-1, x.id.length);
+	var forInt = document.getElementById(x.id).childNodes.length-2;
+	var childString = (targetNo * forInt);
 	var childNumber = childString;
-	if (/rootDiv/.test(target)) {
-		if (document.getElementById('childDiv' + childString).style.display != 'none') {
-//			anzahl der childNodes fehlt noch für for ()
-			for (x=0; x<document.getElementById(target).childNodes.length-1; x++) {
-//			for (x=0; x<3; x++) {
-				var child = 'childDiv' + childNumber;
-				document.getElementById(child).style.display = "none";
-				childNumber++;
+	if (/rootDiv/.test(x.id)) {
+//		if (document.getElementById('childDiv' + childString) != null) {
+			if (document.getElementById('childDiv' + targetNo + '.' + childString).style.display != 'none') {
+				for (x=0; x<forInt; x++) {
+					var child = 'childDiv' + targetNo + '.' + childNumber;
+					document.getElementById(child).style.display = "none";
+					childNumber++;
+				}
+			} else {
+				for (x=0; x<5; x++){
+					var child = 'childDiv' + targetNo + '.' + childNumber;
+					document.getElementById(child).style.display= "block";
+					childNumber++;
+				}
 			}
-		} else {
-			for (x=0; x<3; x++){
-				var child = 'childDiv' + childNumber;
-				document.getElementById(child).style.display= "block";
-				childNumber++;
-			}
-		}
+//		}
 	}
 }

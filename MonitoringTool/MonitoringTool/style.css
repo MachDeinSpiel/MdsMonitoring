@@ -1,23 +1,29 @@
-		#rootDiv0 {
+		#frameDiv {
 		position: relative;
-		margin-left: 7px;
+		margin-left: 5px;
+		border: solid 3px #FF6600;
+		border-radius: 10px;
+		box-shadow: rgba(0, 0, 0, 0.398438) 0px 2px 4px;
 		}
-		#childDiv0 {
+		#frameDiv div[id^='rootDiv'] {
+		font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+        font-size: 100%;
+		position: relative;
+		margin-left: 6px;
+		}
+		#frameDiv div[id^='rootDiv'] > div[id^='childDiv'] {
 		position: relative;
 		margin-left: 30px;
+		display: none;
 		}
-		#childDiv1 {
+		#frameDiv div[id^='rootDiv'] > div[id^='childDiv'] > div[id^='childDiv'] {
 		position: relative;
-		margin-left: 30px;
-		}
-		#childDiv2 {
-		position: relative;
-		margin-left: 30px;
+		margin-left: 53px;
+		display: none;
 		}
 		#map-canvas {
         height: 100%;
         margin: 0px;
-        padding: 0px;
         margin-left: 20px;
         margin-top: 20px;
         border: 2px solid #123;
