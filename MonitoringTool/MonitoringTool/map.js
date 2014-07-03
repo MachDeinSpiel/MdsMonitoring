@@ -73,7 +73,7 @@ var map;
 			    alert('Neuer Spieler: ' + totalPlayer[i].marker.title);
 		        
 		    } else { // Update the player marker if already exists
-		    	totalPlayer[i].marker = null;
+		    	totalPlayer[i].marker.setPosition(myLatlng);
 		    }
 		
 
@@ -96,7 +96,7 @@ var map;
 			if((typeof totalItem[i].latitude !='undefined') &&  (typeof totalItem[i].latitude !='undefined')){
 				myLatlng = new google.maps.LatLng(totalItem[i].latitude, totalItem[i].longitude);
 			}
-	//	    if ((totalItem[i].marker == null) || (typeof totalItem[i].marker == 'undefined')) {// Create new marker if not already exist
+		    if (typeof totalItem[i].marker == 'undefined') {// Create new marker if not already exist
 		    	var image = new google.maps.MarkerImage(
 		    			item[i].mImagePath,
 		    		    null, /* size is determined at runtime */
@@ -111,11 +111,12 @@ var map;
 		        	title: item[i].pathKey,
 		        	icon: image
 		        });
-		  //  } else { // update the marker
-		  //  	totalItem[i].marker = null;
-		    	if(totalItem[i].value == 'remove'){
+		    } else { // update the marker
+		    	totalItem[i].marker.setPosition(myLatlng);
+		    }
+		    if(totalItem[i] == 'remove'){
 		    		totalItem[i].marker.setMap(null);
-		    	}
+		    }
 
 		   // }
 		}

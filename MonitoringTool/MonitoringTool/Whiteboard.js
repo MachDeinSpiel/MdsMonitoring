@@ -2,7 +2,6 @@ function Whiteboard() {
 	
 	//updating Whiteboard
 	Whiteboard.prototype.updateWhiteboard = function (changings, whiteboard, values){
-			console.log(whiteboard);
 		for (var i = 0; i < changings.length; i++){
 			 var keys = changings[i].split(',');
 			 var value = values[i];
