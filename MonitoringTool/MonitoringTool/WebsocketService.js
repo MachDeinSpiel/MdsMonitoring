@@ -75,7 +75,7 @@ function WebsocketService(){
         		function update(changings, values){
         			whiteboard.updateWhiteboard(changings, whiteboard, values);
         			map.update(whiteboard);
-        			generate_table(whiteboard); 
+        			explorer_whiteboard(whiteboard); 
         			console.log(whiteboard);
         			return whiteboard;
         	
