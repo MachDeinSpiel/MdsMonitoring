@@ -4,7 +4,7 @@ var map;
 	var bremen = new google.maps.LatLng(53.05437, 8.78788);
 
 
-	var whiteboard;	
+	var whiteboard = new Whiteboard();	
 	
 	var itemDiv = [];
     var ddDivOptions = {};
@@ -34,22 +34,22 @@ var map;
 	// major update function
 	Map.prototype.update = function (qwhiteboard){	 
 		whiteboard = qwhiteboard;
-
 		for (var i in whiteboard){
-			if(typeof whiteboard[i] === 'object'){		
+			if(typeof whiteboard[i] === 'object' && (whiteboard[i] != whiteboard.Players)){		
 				updateItems(whiteboard[i]);
 				createItemDiv(whiteboard[i]);
 				addInfoWindowListener(whiteboard[i]);
 			}
 
 		}
+		updatePlayers(whiteboard);
 
 		if(typeof whiteboard.Players != 'undefined' && first === true ){
 			createItemDropDown();
 			first = !first;
 		}
 
-		explorer_whiteboard(whiteboard);
+		generate_table(whiteboard);
 
 		return whiteboard;
 	
@@ -58,13 +58,12 @@ var map;
 	// updating player markers
 	function updatePlayers(whiteboard) {
 		totalPlayer  = whiteboard.Players;
-		totalPlayerMarker = 0;
 		for (var i in totalPlayer) {
 			var myLatlng = null;
 			if((typeof totalPlayer[i].latitude !='undefined') &&  (typeof totalPlayer[i].latitude !='undefined')){
 				myLatlng = new google.maps.LatLng(totalPlayer[i].latitude, totalPlayer[i].longitude);
 			}
-		    if (totalPlayer[i].marker == null) { // Create new marker if player does not already exists
+		    if (totalPlayer[i].marker == null || (typeof totalPlayer[i].marker == 'undefined')) { // Create new marker if player does not already exists
 		    	totalPlayer[i].marker = new google.maps.Marker({
 		        	position: myLatlng,
 		        	map: map,
@@ -86,35 +85,25 @@ var map;
 	        }; 
 	        this.infowindow.open(map, this); 
 	    });	
-	    totalPlayerMarker = totalPlayerMarker + 1;
 		}
 	}
 	
 	// Updating the itemmarkers
 	function updateItems(item) {
-
 		totalItem = item;
 		for (var i in totalItem) {
+			var myLatlng = null;
 			if((typeof totalItem[i].latitude !='undefined') &&  (typeof totalItem[i].latitude !='undefined')){
-				var myLatlng = new google.maps.LatLng(totalItem[i].latitude, totalItem[i].longitude);
+				myLatlng = new google.maps.LatLng(totalItem[i].latitude, totalItem[i].longitude);
 			}
-		    if (totalItem[i].marker == null) {// Create new marker if not already exist
+		    if (typeof totalItem[i].marker == 'undefined') {// Create new marker if not already exist
 		    	var image = new google.maps.MarkerImage(
-		    			item[i].imagePath,
+		    			item[i].mImagePath,
 		    		    null, /* size is determined at runtime */
 		    		    null, /* origin is 0,0 */
 		    		    null, /* anchor is bottom center of the scaled image */
 		    		    new google.maps.Size(40, 40)
 		    		); 
-		    	if(totalItem[i].visibility == 'none'){
-		    		image = new google.maps.MarkerImage(
-			    			images/grau.png,
-			    		    null, /* size is determined at runtime */
-			    		    null, /* origin is 0,0 */
-			    		    null, /* anchor is bottom center of the scaled image */
-			    		    new google.maps.Size(40, 40)
-			    		); 
-		    	}
 		    	totalItem[i].marker = new google.maps.Marker({
 		        	position: myLatlng,
 		        	map: map,
@@ -124,22 +113,16 @@ var map;
 		        });
 		    } else { // update the marker
 		    	totalItem[i].marker.setPosition(myLatlng);
-		    	if(totalItem[i].visibility == 'none'){
-		    		var image = new google.maps.MarkerImage(
-			    			images/grau.png,
-			    		    null, /* size is determined at runtime */
-			    		    null, /* origin is 0,0 */
-			    		    null, /* anchor is bottom center of the scaled image */
-			    		    new google.maps.Size(40, 40)
-			    		); 
-		    		totalItem[i].marker.setIcon(image);
-		    	}
 		    }
+		    if(totalItem[i] == 'remove'){
+		    		totalItem[i].marker.setMap(null);
+		    }
+
+		   // }
 		}
 
 	}
-	
-	
+		
 	function addInfoWindowListener(item){
 		for(var i in item){
 		    google.maps.event.addListener(item[i].marker, 'click', function() { 

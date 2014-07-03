@@ -36,9 +36,7 @@ function WebsocketService(){
 		
 	   				//Updatefunktion zur aktualisierung der Standortdaten der Spieler
 
-	   					
-			       		whiteboard = update(changings, whiteboard, values);
-		       			console.log(whiteboard);
+			       		whiteboard = update(changings, values);
 		   				
                     }
                 };
@@ -67,19 +65,18 @@ function WebsocketService(){
    							map.clearMapItems(whiteboard[i]);
    						}
 					}
-   					whiteboard = new Whiteboard();
+   					this.whiteboard = new Whiteboard();
         			ws.send(this.value);
 
         			
         		};
             
         		// major update function
-        		function update(changings, whiteboard, values){
+        		function update(changings, values){
         			whiteboard.updateWhiteboard(changings, whiteboard, values);
         			map.update(whiteboard);
-        
-//        			explorer_whiteboard(whiteboard);
-        
+        			generate_table(whiteboard); 
+        			console.log(whiteboard);
         			return whiteboard;
         	
         	}
