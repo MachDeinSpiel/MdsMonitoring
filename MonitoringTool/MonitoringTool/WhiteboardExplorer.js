@@ -127,6 +127,7 @@ function clickEvent (e) {
 	var x = e.target || e.srcElement;
 	console.log(document.getElementById(x.id));
 	var targetNo = x.id.substring(x.id.length-1, x.id.length);
+	console.log('targetNo'+targetNo);
 	var forInt = document.getElementById(x.id).childNodes.length-2;
 	var childString = (targetNo * forInt);
 	var childNumber = childString;
@@ -147,4 +148,5 @@ function clickEvent (e) {
 			}
 //		}
 	}
+	return false;
 }
